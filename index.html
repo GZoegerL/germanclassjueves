@@ -25,17 +25,17 @@
                     colors: {
                         editorial: {
                             bg: '#E6E4DF',        // Crema/gris cálido claro principal
-                            secondary: '#DCD9D2', // Bloque secundario ligeramente más oscuro
-                            text: '#1C1C1B',      // Carbón oscuro principal
+                            secondary: '#DCDAD4', // Bloque secundario
+                            text: '#1A1A1A',      // Carbón oscuro principal
                             muted: '#5D5C58',     // Gris cálido secundario
                             border: '#C8C5BE',    // Líneas y bordes sutiles
-                            black: '#161615',     // Acentos en negro sólido
-                            whatsapp: '#1E7E48'   // Verde ejecutivo sobrio para WhatsApp
+                            black: '#1A1A1A',     // Acentos en negro sólido
+                            whatsapp: '#25D366'   // Verde WhatsApp
                         }
                     },
                     fontFamily: {
                         display: ['Oswald', 'sans-serif'],
-                        serif: ['"Instrument Serif"', '"Playfair Display"', 'serif'],
+                        serif: ['"Playfair Display"', '"Instrument Serif"', 'serif'],
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     }
                 }
@@ -47,22 +47,26 @@
     <style>
         body {
             background-color: #E6E4DF;
-            color: #1C1C1B;
+            color: #1A1A1A;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
 
         /* Forma de arco/cápsula inferior idéntica a la imagen de referencia */
         .hero-arch-container {
-            background-color: #DCD9D2;
-            border-bottom-left-radius: 9999px;
-            border-bottom-right-radius: 9999px;
-            box-shadow: inset 0 -10px 25px rgba(22, 22, 21, 0.04);
+            background-color: #DCDAD4;
+            border-radius: 0 0 220px 220px;
+            box-shadow: inset 0 -10px 25px rgba(26, 26, 26, 0.04);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .hero-arch-container.drag-over {
+            border-color: #1A1A1A;
+            box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.16);
         }
 
         .hero-arch-image {
-            border-bottom-left-radius: 9999px;
-            border-bottom-right-radius: 9999px;
+            border-radius: 0 0 220px 220px;
         }
 
         /* Animación Reveal al hacer scroll */
@@ -205,18 +209,18 @@
                 <!-- COLUMNA IZQUIERDA: Saludo Serif + Titular Gigante + Párrafo + Botón Píldora -->
                 <div class="lg:col-span-5 order-2 lg:order-1 pt-4 lg:pt-12 reveal-item">
                     <p class="font-serif italic text-2xl sm:text-3xl text-editorial-text mb-2">
-                        Hola, soy Germán,
+                        Hola. Soy Germán Zoeger,
                     </p>
-                    <h1 class="font-display font-bold uppercase text-5xl sm:text-6xl xl:text-[68px] leading-[0.94] tracking-tight text-editorial-text">
+                    <h1 class="font-display font-bold uppercase text-5xl sm:text-6xl xl:text-[66px] leading-[0.94] tracking-tight text-editorial-text">
                         ESTRATEGIA COMERCIAL
-                        <span class="block font-serif italic font-normal lowercase text-4xl sm:text-5xl xl:text-[58px] my-1.5 text-editorial-text">
-                            &amp; Expansión
+                        <span class="block font-serif italic font-normal lowercase text-4xl sm:text-5xl xl:text-[56px] my-1.5 text-editorial-text">
+                            &amp; Conferencista
                         </span>
-                        DE MARCAS
+                        EN PERÚ
                     </h1>
 
                     <p class="mt-6 text-sm sm:text-base text-editorial-muted leading-relaxed max-w-md">
-                        Consultor y conferencista especializado en capacitación ejecutiva de ventas, estrategias de negocio, estructuración de redes de distribución a nivel nacional y desarrollo de marcas en el mercado peruano.
+                        Especialista en capacitación y conferencias en estrategias comerciales, negocios, marketing y ventas, estructuración de red de distribución a nivel nacional y desarrollo de marcas para el mercado peruano.
                     </p>
 
                     <!-- Botón Píldora Negro "CONTÁCTAME ->" con ícono circular blanco + WhatsApp -->
@@ -235,27 +239,31 @@
                     </div>
                 </div>
 
-                <!-- COLUMNA CENTRAL: Retrato en contenedor vertical con arco inferior (Arch/Pill bottom shape) -->
+                <!-- COLUMNA CENTRAL: Retrato en contenedor vertical con arco inferior + Pegar (Ctrl+V) / Fijar / Exportar HTML -->
                 <div class="lg:col-span-5 order-1 lg:order-2 flex flex-col items-center reveal-item delay-100">
-                    <div id="heroParallaxWrapper" class="w-full max-w-[360px] sm:max-w-[400px] hero-arch-container pt-8 px-4 pb-4 border-x border-b border-editorial-border/80 relative group">
-                        <div class="aspect-[4/4.8] w-full overflow-hidden hero-arch-image bg-editorial-border relative">
-                            <!-- Fotografía profesional de alta calidad con fallback -->
+                    <div id="heroParallaxWrapper" class="w-full max-w-[370px] sm:max-w-[410px] hero-arch-container pt-7 px-4 pb-5 border-x border-b border-editorial-border/90 relative group">
+                        <div id="portraitDropZone" class="aspect-[4/4.9] w-full overflow-hidden hero-arch-image bg-editorial-secondary border border-editorial-border/60 relative">
+                            <!-- Retrato ejecutivo fijado de forma permanente a todo color desde el inicio -->
                             <img 
-                                id="germanPortraitImg"
-                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85" 
-                                onerror="this.onerror=null; this.src='https://placehold.co/600x720/DCD9D2/1C1C1B?text=Germ%C3%A1n+Zoeger';"
-                                alt="Germán Zoeger - Consultor Comercial y Conferencista en Perú" 
-                                class="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                                id="profile-photo"
+                                src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 735'%3E%3Cdefs%3E%3ClinearGradient id='studioBg' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23EAE8E3'/%3E%3Cstop offset='100%25' stop-color='%23D6D2C9'/%3E%3C/linearGradient%3E%3ClinearGradient id='suitGrad' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%231E293B'/%3E%3Cstop offset='100%25' stop-color='%230F172A'/%3E%3C/linearGradient%3E%3ClinearGradient id='skinGrad' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23D69E7E'/%3E%3Cstop offset='100%25' stop-color='%23BD8262'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='600' height='735' fill='url(%23studioBg)'/%3E%3Cellipse cx='300' cy='252' rx='82' ry='98' fill='url(%23skinGrad)'/%3E%3Cpath d='M218 232 C222 152 262 128 302 128 C345 128 380 154 382 230 C366 195 338 178 300 178 C262 178 236 196 218 232 Z' fill='%2327272A'/%3E%3Crect x='274' y='338' width='52' height='58' rx='18' fill='%23C68B6B'/%3E%3Cpath d='M120 735 C124 515 198 415 300 415 C402 415 476 515 480 735 Z' fill='url(%23suitGrad)'/%3E%3Cpolygon points='254,415 300,535 346,415' fill='%23DBEAFE'/%3E%3Cline x1='300' y1='448' x2='300' y2='535' stroke='%2393C5FD' stroke-width='2'/%3E%3Cpolygon points='358,528 398,528 378,500' fill='%2338BDF8'/%3E%3Ccircle cx='269' cy='244' r='5' fill='%233F2E21'/%3E%3Ccircle cx='331' cy='244' r='5' fill='%233F2E21'/%3E%3Cpath d='M278 292 Q300 306 322 292' fill='none' stroke='%237C4732' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E"
+                                alt="Germán Zoeger - Estratega Comercial y Conferencista en Perú" 
+                                class="w-full h-full object-cover object-top saturate-110 contrast-105 group-hover:scale-[1.02] transition-all duration-700"
                             >
                         </div>
 
-                        <!-- Selector sutil para probar o reemplazar fotografía propia al instante -->
-                        <div class="mt-3 flex justify-center">
-                            <label for="uploadPortraitInput" class="cursor-pointer inline-flex items-center gap-1.5 text-[11px] text-editorial-muted hover:text-editorial-text transition-colors bg-editorial-bg/80 px-3 py-1 rounded-full border border-editorial-border">
+                        <!-- Control discreto para actualizar o exportar el archivo HTML con fotografía incrustada -->
+                        <div class="mt-3 flex flex-wrap items-center justify-center gap-2 px-2">
+                            <label for="uploadPortraitInput" class="cursor-pointer inline-flex items-center gap-1.5 text-[10px] font-display uppercase tracking-wider text-editorial-muted hover:text-editorial-text bg-editorial-bg/80 hover:bg-editorial-bg border border-editorial-border px-3 py-1 rounded-full transition-colors">
                                 <i data-lucide="camera" class="w-3 h-3"></i>
-                                <span>Cambiar foto de perfil</span>
+                                <span>Cambiar Foto</span>
                             </label>
                             <input type="file" id="uploadPortraitInput" accept="image/*" class="hidden">
+
+                            <button type="button" id="downloadHtmlBtn" title="Descarga este archivo .html con la fotografía actual incrustada" class="cursor-pointer inline-flex items-center gap-1.5 text-[10px] font-display uppercase tracking-wider text-editorial-text bg-editorial-bg hover:bg-white border border-editorial-border px-3 py-1 rounded-full transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                <span>Exportar HTML</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -264,7 +272,7 @@
                 <div class="lg:col-span-2 order-3 flex flex-row flex-wrap sm:flex-nowrap lg:flex-col justify-between lg:justify-center items-start lg:items-end gap-6 lg:gap-7 border-t lg:border-t-0 border-editorial-border pt-6 lg:pt-0 text-left lg:text-right reveal-item delay-200">
                     <div>
                         <p class="font-display font-bold text-3xl sm:text-4xl text-editorial-text leading-none">
-                            <span class="counter-number" data-target="15" data-suffix="+">0</span>
+                            <span class="counter-number" data-prefix="+" data-target="25" data-suffix="">+0</span>
                         </p>
                         <p class="text-[11px] sm:text-xs text-editorial-muted mt-1.5 leading-tight">
                             Años de<br class="hidden lg:inline"> Experiencia
@@ -273,28 +281,28 @@
 
                     <div>
                         <p class="font-display font-bold text-3xl sm:text-4xl text-editorial-text leading-none">
-                            <span class="counter-number" data-target="24" data-suffix="">0</span>
+                            <span class="counter-number" data-prefix="+" data-target="50" data-suffix="">+0</span>
                         </p>
                         <p class="text-[11px] sm:text-xs text-editorial-muted mt-1.5 leading-tight">
-                            Regiones en<br class="hidden lg:inline"> Red Nacional
+                            Empresas a<br class="hidden lg:inline"> nivel nacional
                         </p>
                     </div>
 
                     <div>
                         <p class="font-display font-bold text-3xl sm:text-4xl text-editorial-text leading-none">
-                            <span class="counter-number" data-target="120" data-suffix="+">0</span>
+                            <span class="counter-number" data-prefix="" data-target="100" data-suffix="%">0%</span>
                         </p>
                         <p class="text-[11px] sm:text-xs text-editorial-muted mt-1.5 leading-tight">
-                            Empresas<br class="hidden lg:inline"> Capacitadas
+                            Enfoque en<br class="hidden lg:inline"> Resultados
                         </p>
                     </div>
 
                     <div>
                         <p class="font-display font-bold text-3xl sm:text-4xl text-editorial-text leading-none">
-                            <span class="counter-number" data-target="300" data-suffix="+">0</span>
+                            <span class="counter-number" data-prefix="+" data-target="50" data-suffix="">+0</span>
                         </p>
                         <p class="text-[11px] sm:text-xs text-editorial-muted mt-1.5 leading-tight">
-                            Conferencias<br class="hidden lg:inline"> Dictadas
+                            Conferencias<br class="hidden lg:inline"> y Talleres
                         </p>
                     </div>
                 </div>
@@ -311,7 +319,7 @@
                         CAPACITACIÓN &amp; CONFERENCIAS
                     </h2>
                     <p class="text-xs sm:text-sm text-editorial-muted leading-relaxed">
-                        Programas de alto impacto en ventas, liderazgo comercial, negociación B2B y gestión de equipos de alto rendimiento.
+                        Más de +50 conferencias y programas de alto impacto en ventas, liderazgo comercial, negociación B2B y equipos de alto rendimiento.
                     </p>
                 </div>
 
@@ -359,7 +367,7 @@
                     CONFÍAN EN MI EXPERIENCIA
                 </h2>
                 <p class="text-xs sm:text-sm text-editorial-muted max-w-md sm:text-right">
-                    Sectores estratégicos e industrias en las que impulso el crecimiento comercial y la capilaridad en todo el Perú.
+                    Más de +50 empresas a nivel nacional e industrias estratégicas donde impulso crecimiento comercial y capilaridad en todo el Perú.
                 </p>
             </div>
 
@@ -415,7 +423,7 @@
                             Estrategia &amp; Go-To-Market
                         </span>
                         <span class="px-3.5 py-1.5 rounded-full bg-editorial-secondary border border-editorial-border text-xs font-medium text-editorial-text">
-                            Conferencias In-House
+                            +50 Conferencias In-House
                         </span>
                         <span class="px-3.5 py-1.5 rounded-full bg-editorial-secondary border border-editorial-border text-xs font-medium text-editorial-text">
                             Cobertura 24 Regiones
@@ -433,7 +441,7 @@
                             Entender la dinámica del Perú requiere dominar tanto la negociación corporativa en Lima como la capilaridad de los mercados regionales en el norte, centro y sur del país. Combino visión estratégica de negocios con ejecución práctica en el punto de venta.
                         </p>
                         <p>
-                            Ya sea capacitando a tu fuerza de ventas mediante conferencias de alto impacto, diseñando la arquitectura comercial de tu empresa, conectando tus productos con una red de distribución nacional o posicionando una nueva marca en Perú, trabajamos juntos para convertir objetivos en resultados medibles.
+                            Con una trayectoria respaldada por +25 años de experiencia, +50 empresas asesoradas a nivel nacional y +50 conferencias dictadas, capacito a tu fuerza de ventas, diseño la arquitectura comercial de tu empresa, conecto tus productos con una red de distribución nacional y posiciono nuevas marcas en Perú para convertir objetivos en resultados medibles.
                         </p>
                     </div>
                 </div>
@@ -451,7 +459,7 @@
                         CASOS &amp; CONFERENCIAS
                     </h2>
                     <p class="mt-2 text-xs sm:text-sm text-editorial-muted max-w-lg">
-                        Explora nuestras intervenciones estratégicas, programas de capacitación y despliegues comerciales en el mercado peruano.
+                        Explora nuestras +50 conferencias, intervenciones estratégicas, programas de capacitación y despliegues comerciales en el mercado peruano.
                     </p>
                 </div>
 
@@ -487,13 +495,13 @@
                          data-tag="CONFERENCIAS"
                          data-image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1400&q=80"
                          data-description="Programa intensivo diseñado para gerentes comerciales, supervisores y ejecutivos de cuentas clave en Perú. Aborda técnicas avanzadas de cierre consultivo, defensa de margen frente a compradores corporativos y liderazgo de equipos en entornos altamente competitivos."
-                         data-results="+34% en tasa de cierre comercial • +180 ejecutivos entrenados en Lima, Arequipa y Trujillo.">
-                    <div class="w-full h-[270px] sm:h-[420px] rounded-2xl overflow-hidden bg-editorial-black relative">
+                         data-results="+34% en tasa de cierre comercial • +50 conferencias dictadas en Lima, Arequipa, Trujillo y provincias.">
+                    <div class="w-full h-[270px] sm:h-[420px] rounded-2xl overflow-hidden bg-editorial-secondary relative">
                         <img 
                             src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1400&q=80" 
-                            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/161615/E6E4DF?text=Cumbre+de+Liderazgo+Comercial';"
+                            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/1E293B/E6E4DF?text=Cumbre+de+Liderazgo+Comercial';"
                             alt="Cumbre de Liderazgo y Negociación B2B" 
-                            class="w-full h-full object-cover opacity-90 grayscale group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-700"
+                            class="w-full h-full object-cover saturate-110 contrast-105 group-hover:scale-[1.02] transition-all duration-700"
                         >
                         <div class="absolute top-4 right-4 bg-editorial-bg/90 backdrop-blur-sm text-editorial-black px-3.5 py-1.5 rounded-full text-[11px] font-display uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
                             <span>Ver detalle del caso</span>
@@ -506,7 +514,7 @@
                             CUMBRE DE LIDERAZGO Y NEGOCIACIÓN B2B
                         </h3>
                         <div class="flex flex-wrap items-center gap-3 text-xs text-editorial-muted">
-                            <span>Conferencia Magistral y Taller In-House</span>
+                            <span>+50 Conferencias y Talleres In-House</span>
                             <span>2026</span>
                             <span class="bg-editorial-black text-editorial-bg px-3.5 py-1 rounded-full font-display uppercase tracking-wider text-[10px]">
                                 CONFERENCIAS
@@ -525,12 +533,12 @@
                          data-image="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80"
                          data-description="Diseño e implementación de ruta al mercado (Go-To-Market) para empresa fabricante de consumo masivo. Selección, homologación y puesta en marcha de socios distribuidores exclusivos en plazas estratégicas del Norte, Centro, Sur y Oriente del Perú."
                          data-results="Cobertura nacional en 24 regiones • Incremento del 48% en volumen de venta fuera de Lima.">
-                    <div class="w-full h-[250px] sm:h-[300px] rounded-2xl overflow-hidden bg-editorial-black relative">
+                    <div class="w-full h-[250px] sm:h-[300px] rounded-2xl overflow-hidden bg-editorial-secondary relative">
                         <img 
                             src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" 
-                            onerror="this.onerror=null; this.src='https://placehold.co/800x500/161615/E6E4DF?text=Red+de+Distribuci%C3%B3n+Nacional';"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x500/1E293B/E6E4DF?text=Red+de+Distribuci%C3%B3n+Nacional';"
                             alt="Expansión de Red de Distribución Nacional" 
-                            class="w-full h-full object-cover opacity-90 grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                            class="w-full h-full object-cover saturate-110 contrast-105 group-hover:scale-[1.03] transition-all duration-700"
                         >
                     </div>
                     <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-editorial-border">
@@ -557,12 +565,12 @@
                          data-image="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=80"
                          data-description="Acompañamiento integral para la introducción de una marca internacional en el mercado peruano: arquitectura de precios, propuesta de valor para compradores retail, negociación de surtido y ejecución en punto de venta."
                          data-results="Ingreso exitoso a 3 cadenas nacionales • Rotación superior al 125% de la meta inicial.">
-                    <div class="w-full h-[250px] sm:h-[300px] rounded-2xl overflow-hidden bg-editorial-black relative">
+                    <div class="w-full h-[250px] sm:h-[300px] rounded-2xl overflow-hidden bg-editorial-secondary relative">
                         <img 
                             src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=80" 
-                            onerror="this.onerror=null; this.src='https://placehold.co/800x500/161615/E6E4DF?text=Desarrollo+de+Marcas+Per%C3%BA';"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x500/1E293B/E6E4DF?text=Desarrollo+de+Marcas+Per%C3%BA';"
                             alt="Lanzamiento de Marca en Retail Peruano" 
-                            class="w-full h-full object-cover opacity-90 grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                            class="w-full h-full object-cover saturate-110 contrast-105 group-hover:scale-[1.03] transition-all duration-700"
                         >
                     </div>
                     <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-editorial-border">
@@ -589,12 +597,12 @@
                          data-image="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80"
                          data-description="Transformación del modelo de gestión comercial de una empresa distribuidora mediana: redefinición de territorios, tablero de control de KPIs comerciales, incentivos por rentabilidad y entrenamiento semanal en campo."
                          data-results="+29% en ticket promedio • Reducción del 22% en cartera vencida.">
-                    <div class="w-full h-[250px] sm:h-[340px] rounded-2xl overflow-hidden bg-editorial-black relative">
+                    <div class="w-full h-[250px] sm:h-[340px] rounded-2xl overflow-hidden bg-editorial-secondary relative">
                         <img 
                             src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80" 
-                            onerror="this.onerror=null; this.src='https://placehold.co/1200x450/161615/E6E4DF?text=Aceleraci%C3%B3n+de+Fuerza+de+Ventas';"
+                            onerror="this.onerror=null; this.src='https://placehold.co/1200x450/1E293B/E6E4DF?text=Aceleraci%C3%B3n+de+Fuerza+de+Ventas';"
                             alt="Aceleración Comercial y Reingeniería de Ventas" 
-                            class="w-full h-full object-cover opacity-90 grayscale group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-700"
+                            class="w-full h-full object-cover saturate-110 contrast-105 group-hover:scale-[1.02] transition-all duration-700"
                         >
                     </div>
                     <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-editorial-border">
@@ -662,6 +670,23 @@
 
                     <!-- Columna Derecha: Formulario Minimalista Funcional hacia gzoegerl@gmail.com -->
                     <div class="lg:col-span-7 bg-editorial-bg rounded-2xl p-6 sm:p-8 border border-editorial-border">
+                        <!-- Barra Superior de Auto-envío / Prueba a mi correo -->
+                        <div class="mb-6 pb-4 border-b border-editorial-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <span class="text-[11px] font-display uppercase tracking-widest text-editorial-muted block">
+                                    Modo de Envío
+                                </span>
+                                <p id="selfRequestStatusText" class="text-xs text-editorial-text mt-0.5">
+                                    Consulta estándar de cliente hacia <strong>gzoegerl@gmail.com</strong>
+                                </p>
+                            </div>
+                            <button type="button" id="toggleSelfRequestBtn" aria-pressed="false"
+                                    class="magnetic-btn bg-editorial-secondary hover:bg-editorial-black hover:text-editorial-bg text-editorial-text border border-editorial-border px-4 py-2 rounded-full inline-flex items-center gap-2 text-[11px] font-display uppercase tracking-wider transition-all cursor-pointer self-start sm:self-auto">
+                                <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+                                <span id="toggleSelfRequestLabel">Auto-envío / Prueba a mi correo (gzoegerl@gmail.com)</span>
+                            </button>
+                        </div>
+
                         <form id="contactForm" novalidate class="space-y-5">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <!-- Nombre -->
@@ -689,7 +714,7 @@
                                 <!-- Correo Electrónico -->
                                 <div>
                                     <label for="email" class="block text-xs font-display uppercase tracking-wider text-editorial-text mb-2">
-                                        Correo Electrónico *
+                                        Correo Electrónico (Remitente) *
                                     </label>
                                     <input type="email" id="email" name="email" required placeholder="tu.correo@empresa.com" 
                                            class="w-full bg-transparent border-b border-editorial-border focus:border-editorial-black py-2.5 text-sm text-editorial-text placeholder:text-editorial-muted/60 focus:outline-none transition-colors">
@@ -721,17 +746,25 @@
                                 <p class="error-msg hidden text-[11px] text-red-700 mt-1">Por favor escribe un breve mensaje.</p>
                             </div>
 
-                            <!-- Botón de Envío + Destino visible -->
+                            <!-- Botón de Envío + Apertura Directa en Cliente de Correo / Gmail -->
                             <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <button type="submit" id="submitFormBtn" class="magnetic-btn group bg-editorial-black text-editorial-bg pl-6 pr-2.5 py-2.5 rounded-full inline-flex items-center justify-center gap-4 text-xs font-display tracking-widest uppercase hover:bg-neutral-800 shadow-sm cursor-pointer">
-                                    <span id="submitBtnText">ENVIAR A GZOEGERL@GMAIL.COM</span>
-                                    <span class="w-7 h-7 rounded-full bg-editorial-bg text-editorial-black flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5">
-                                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                                    </span>
-                                </button>
+                                <div class="flex flex-wrap items-center gap-3">
+                                    <button type="submit" id="submitFormBtn" class="magnetic-btn group bg-editorial-black text-editorial-bg pl-6 pr-2.5 py-2.5 rounded-full inline-flex items-center justify-center gap-4 text-xs font-display tracking-widest uppercase hover:bg-neutral-800 shadow-sm cursor-pointer">
+                                        <span id="submitBtnText">ENVIAR A GZOEGERL@GMAIL.COM</span>
+                                        <span class="w-7 h-7 rounded-full bg-editorial-bg text-editorial-black flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5">
+                                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                        </span>
+                                    </button>
+
+                                    <button type="button" id="directMailClientBtn" title="Abrir directamente en Gmail o tu gestor de correo predeterminado"
+                                            class="magnetic-btn border border-editorial-black text-editorial-text hover:bg-editorial-black hover:text-editorial-bg px-4 py-3 rounded-full inline-flex items-center gap-2 text-[11px] font-display uppercase tracking-wider transition-colors cursor-pointer">
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                        <span>Abrir en Gmail / Correo</span>
+                                    </button>
+                                </div>
 
                                 <span class="text-[11px] text-editorial-muted">
-                                    Envío directo a <strong>gzoegerl@gmail.com</strong>
+                                    Destino: <strong>gzoegerl@gmail.com</strong>
                                 </span>
                             </div>
 
@@ -779,8 +812,8 @@
     <!-- ===================================================================== -->
     <div id="caseModal" class="fixed inset-0 z-50 bg-editorial-black/75 backdrop-blur-sm hidden items-center justify-center p-4 sm:p-6">
         <div class="bg-editorial-bg border border-editorial-border rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all">
-            <div class="relative h-56 sm:h-72 bg-editorial-black">
-                <img id="modalImage" src="" alt="" class="w-full h-full object-cover opacity-90">
+            <div class="relative h-56 sm:h-72 bg-editorial-secondary">
+                <img id="modalImage" src="" alt="" class="w-full h-full object-cover saturate-110 contrast-105">
                 <button id="closeModalBtn" aria-label="Cerrar detalle" class="absolute top-4 right-4 bg-editorial-bg text-editorial-black w-10 h-10 rounded-full flex items-center justify-center hover:bg-editorial-secondary transition-colors cursor-pointer shadow">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
@@ -828,49 +861,68 @@
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
             // -----------------------------------------------------------------
-            // 2. BARRA DE PROGRESO DE LECTURA SUPERIOR
+            // 2. MENÚ OVERLAY DESPLEGABLE INTERACTIVO
             // -----------------------------------------------------------------
-            const readingProgress = document.getElementById('readingProgress');
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
-                readingProgress.style.transform = `scaleX(${scrollPercent})`;
-            }, { passive: true });
-
-            // -----------------------------------------------------------------
-            // 3. MENÚ OVERLAY INTERACTIVO (Abrir, Cerrar, Tecla ESC)
-            // -----------------------------------------------------------------
+            const overlayMenu = document.getElementById('overlayMenu');
             const openMenuBtn = document.getElementById('openMenuBtn');
             const closeMenuBtn = document.getElementById('closeMenuBtn');
-            const overlayMenu = document.getElementById('overlayMenu');
             const overlayLinks = document.querySelectorAll('.overlay-link');
 
             function openMenu() {
+                if (!overlayMenu) return;
                 overlayMenu.classList.remove('opacity-0', 'pointer-events-none');
                 overlayMenu.classList.add('opacity-100', 'pointer-events-auto');
                 document.body.style.overflow = 'hidden';
             }
 
             function closeMenu() {
-                overlayMenu.classList.add('opacity-0', 'pointer-events-none');
+                if (!overlayMenu) return;
                 overlayMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                overlayMenu.classList.add('opacity-0', 'pointer-events-none');
                 document.body.style.overflow = '';
             }
 
-            openMenuBtn.addEventListener('click', openMenu);
-            closeMenuBtn.addEventListener('click', closeMenu);
-            overlayLinks.forEach(link => link.addEventListener('click', closeMenu));
+            if (openMenuBtn) openMenuBtn.addEventListener('click', openMenu);
+            if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenu);
+
+            overlayLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeMenu();
-                    closeCaseModal();
+                    if (caseModal && !caseModal.classList.contains('hidden')) {
+                        closeCaseModal();
+                    }
                 }
             });
 
             // -----------------------------------------------------------------
-            // 4. ANIMACIÓN REVEAL AL HACER SCROLL (IntersectionObserver)
+            // 3. BARRA DE PROGRESO DE LECTURA Y PARALLAX SUTIL EN RETRATO HERO
+            // -----------------------------------------------------------------
+            const readingProgress = document.getElementById('readingProgress');
+            const heroWrapper = document.getElementById('heroParallaxWrapper');
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
+
+                if (readingProgress) {
+                    readingProgress.style.transform = `scaleX(${progress})`;
+                }
+
+                if (heroWrapper && window.innerWidth >= 1024) {
+                    const offset = Math.min(scrollTop * 0.06, 28);
+                    heroWrapper.style.transform = `translateY(${offset}px)`;
+                } else if (heroWrapper) {
+                    heroWrapper.style.transform = '';
+                }
+            }, { passive: true });
+
+            // -----------------------------------------------------------------
+            // 4. INTERSECTION OBSERVER PARA ANIMACIONES REVEAL AL HACER SCROLL
             // -----------------------------------------------------------------
             const revealItems = document.querySelectorAll('.reveal-item');
             const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -880,69 +932,55 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
 
-            revealItems.forEach(el => revealObserver.observe(el));
+            revealItems.forEach(item => revealObserver.observe(item));
 
             // -----------------------------------------------------------------
-            // 5. CONTADOR ANIMADO (COUNT-UP) EN MÉTRICAS DEL HERO
+            // 5. CONTADORES ANIMADOS (COUNT-UP) PARA MÉTRICAS DEL HERO
             // -----------------------------------------------------------------
             const counters = document.querySelectorAll('.counter-number');
-            let countersStarted = false;
+            const animateCounter = (el) => {
+                const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+                const prefix = el.getAttribute('data-prefix') || '';
+                const suffix = el.getAttribute('data-suffix') || '';
+                const duration = 1400;
+                const startTime = performance.now();
 
-            function animateCounters() {
-                if (countersStarted) return;
-                countersStarted = true;
+                const step = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const currentVal = Math.round(eased * target);
+                    el.textContent = `${prefix}${currentVal}${suffix}`;
 
-                counters.forEach(counter => {
-                    const target = parseInt(counter.getAttribute('data-target'), 10);
-                    const suffix = counter.getAttribute('data-suffix') || '';
-                    const duration = 1600; // ms
-                    const startTime = performance.now();
-
-                    function updateCount(currentTime) {
-                        const elapsed = currentTime - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        // Easing suave easeOutQuart
-                        const easeProgress = 1 - Math.pow(1 - progress, 4);
-                        const currentVal = Math.floor(easeProgress * target);
-                        counter.textContent = currentVal + suffix;
-
-                        if (progress < 1) {
-                            requestAnimationFrame(updateCount);
-                        } else {
-                            counter.textContent = target + suffix;
-                        }
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        el.textContent = `${prefix}${target}${suffix}`;
                     }
-                    requestAnimationFrame(updateCount);
+                };
+
+                requestAnimationFrame(step);
+            };
+
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    }
                 });
-            }
+            }, { threshold: 0.3 });
 
-            const counterSection = document.querySelector('.counter-number');
-            if (counterSection) {
-                const counterObserver = new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) {
-                        animateCounters();
-                        counterObserver.disconnect();
-                    }
-                }, { threshold: 0.3 });
-                counterObserver.observe(counterSection);
-            }
+            counters.forEach(counter => counterObserver.observe(counter));
 
             // -----------------------------------------------------------------
-            // 6. EFECTO PARALLAX SUTIL EN RETRATO CENTRAL & MAGNETISMO EN BOTONES
+            // 6. EFECTO MAGNÉTICO SUAVE EN BOTONES DE ALTO IMPACTO
             // -----------------------------------------------------------------
-            const heroWrapper = document.getElementById('heroParallaxWrapper');
-            window.addEventListener('scroll', () => {
-                if (window.innerWidth >= 1024 && heroWrapper) {
-                    const scrolled = window.scrollY;
-                    if (scrolled < 600) {
-                        heroWrapper.style.transform = `translateY(${scrolled * 0.06}px)`;
-                    }
-                }
-            }, { passive: true });
-
-            // Botones magnéticos sutiles en escritorio
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -950,27 +988,146 @@
                     const rect = btn.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-                    btn.style.transform = `translate(${x * 0.14}px, ${y * 0.18}px)`;
+                    btn.style.transform = `translate(${x * 0.14}px, ${y * 0.14}px)`;
                 });
 
                 btn.addEventListener('mouseleave', () => {
-                    btn.style.transform = 'translate(0px, 0px)';
+                    btn.style.transform = '';
                 });
             });
 
-            // Selector rápido para previsualizar foto propia en el arco del Hero
+            // -----------------------------------------------------------------
+            // GESTIÓN PERMANENTE DE FOTO DE PERFIL (Fija desde el inicio + Persistencia + Export HTML)
+            // -----------------------------------------------------------------
+            const STORAGE_PHOTO_KEY = 'german_zoeger_profile_photo_v1';
             const uploadPortraitInput = document.getElementById('uploadPortraitInput');
-            const germanPortraitImg = document.getElementById('germanPortraitImg');
-            if (uploadPortraitInput && germanPortraitImg) {
-                uploadPortraitInput.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            germanPortraitImg.src = event.target.result;
-                        };
-                        reader.readAsDataURL(file);
+            const profilePhotoImg = document.getElementById('profile-photo');
+            const downloadHtmlBtn = document.getElementById('downloadHtmlBtn');
+
+            function applyProfilePhotoDataUrl(dataUrl, persist = true) {
+                if (!dataUrl || !profilePhotoImg) return;
+                profilePhotoImg.src = dataUrl;
+                if (persist) {
+                    try {
+                        localStorage.setItem(STORAGE_PHOTO_KEY, dataUrl);
+                    } catch (err) {
+                        compressAndStoreImage(dataUrl);
                     }
+                }
+            }
+
+            function compressAndStoreImage(dataUrl) {
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxDim = 900;
+                    let w = tempImg.width;
+                    let h = tempImg.height;
+                    if (w > maxDim || h > maxDim) {
+                        if (w > h) {
+                            h = Math.round((h * maxDim) / w);
+                            w = maxDim;
+                        } else {
+                            w = Math.round((w * maxDim) / h);
+                            h = maxDim;
+                        }
+                    }
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(tempImg, 0, 0, w, h);
+                    const compressed = canvas.toDataURL('image/jpeg', 0.88);
+                    profilePhotoImg.src = compressed;
+                    try {
+                        localStorage.setItem(STORAGE_PHOTO_KEY, compressed);
+                    } catch (e) { /* Ignorar si excede cuota */ }
+                };
+                tempImg.src = dataUrl;
+            }
+
+            function processImageFile(file) {
+                if (!file || !file.type.startsWith('image/')) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    applyProfilePhotoDataUrl(event.target.result, true);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // 1. Restaurar foto guardada previamente en localStorage si el usuario reemplazó la foto fija
+            try {
+                const savedPhoto = localStorage.getItem(STORAGE_PHOTO_KEY);
+                if (savedPhoto && savedPhoto.startsWith('data:image/')) {
+                    applyProfilePhotoDataUrl(savedPhoto, false);
+                }
+            } catch (e) { /* Ignorar restricciones de almacenamiento */ }
+
+            // 2. Selección manual mediante botón "Cambiar Foto"
+            if (uploadPortraitInput) {
+                uploadPortraitInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        processImageFile(e.target.files[0]);
+                    }
+                });
+            }
+
+            // 3. Pegar imagen directamente desde el portapapeles (Ctrl+V / Cmd+V) en cualquier parte
+            document.addEventListener('paste', (e) => {
+                const items = (e.clipboardData || e.originalEvent?.clipboardData)?.items;
+                if (!items) return;
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf('image') !== -1) {
+                        const blob = items[i].getAsFile();
+                        processImageFile(blob);
+                        break;
+                    }
+                }
+            });
+
+            // 4. Arrastrar y soltar (Drag & Drop) sobre el marco del retrato
+            if (heroWrapper) {
+                ['dragenter', 'dragover'].forEach(evtName => {
+                    heroWrapper.addEventListener(evtName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        heroWrapper.classList.add('drag-over');
+                    });
+                });
+
+                ['dragleave', 'drop'].forEach(evtName => {
+                    heroWrapper.addEventListener(evtName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        heroWrapper.classList.remove('drag-over');
+                    });
+                });
+
+                heroWrapper.addEventListener('drop', (e) => {
+                    const files = e.dataTransfer?.files;
+                    if (files && files[0]) {
+                        processImageFile(files[0]);
+                    }
+                });
+            }
+
+            // 5. Exportar archivo HTML autónomo con la foto incrustada
+            if (downloadHtmlBtn) {
+                downloadHtmlBtn.addEventListener('click', () => {
+                    const currentPhotoSrc = profilePhotoImg.src;
+                    const clonedDoc = document.documentElement.cloneNode(true);
+                    const clonedImg = clonedDoc.querySelector('#profile-photo');
+                    if (clonedImg) clonedImg.setAttribute('src', currentPhotoSrc);
+
+                    const finalHtml = '<!DOCTYPE html>\n' + clonedDoc.outerHTML;
+                    const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'german-zoeger.html';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
                 });
             }
 
@@ -1064,12 +1221,102 @@
             });
 
             // -----------------------------------------------------------------
-            // 8. VALIDACIÓN EN TIEMPO REAL Y ENVÍO DIRECTO A gzoegerl@gmail.com
+            // 8. VALIDACIÓN EN TIEMPO REAL, AUTO-SOLICITUD Y ENVÍO A gzoegerl@gmail.com
             // -----------------------------------------------------------------
             const contactForm = document.getElementById('contactForm');
             const formFeedback = document.getElementById('formFeedback');
             const submitBtnText = document.getElementById('submitBtnText');
             const submitFormBtn = document.getElementById('submitFormBtn');
+            const toggleSelfRequestBtn = document.getElementById('toggleSelfRequestBtn');
+            const toggleSelfRequestLabel = document.getElementById('toggleSelfRequestLabel');
+            const selfRequestStatusText = document.getElementById('selfRequestStatusText');
+            const directMailClientBtn = document.getElementById('directMailClientBtn');
+
+            const fullNameInput = document.getElementById('fullName');
+            const companyInput = document.getElementById('company');
+            const emailInput = document.getElementById('email');
+            const serviceSelect = document.getElementById('service');
+            const messageInput = document.getElementById('message');
+
+            let isSelfRequestMode = false;
+
+            function setSelfRequestMode(active) {
+                isSelfRequestMode = active;
+                toggleSelfRequestBtn.setAttribute('aria-pressed', String(active));
+
+                if (active) {
+                    // Activar estilos editoriales en negro sólido
+                    toggleSelfRequestBtn.classList.remove('bg-editorial-secondary', 'text-editorial-text');
+                    toggleSelfRequestBtn.classList.add('bg-editorial-black', 'text-editorial-bg');
+                    toggleSelfRequestLabel.textContent = 'Modo Auto-solicitud Activo (Limpiar)';
+                    selfRequestStatusText.innerHTML = 'Auto-envío habilitado: remitente y destinatario <strong>gzoegerl@gmail.com</strong>';
+                    submitBtnText.textContent = 'AUTO-ENVIAR SOLICITUD A MI BANDEJA';
+
+                    // Autocompletar datos personales de Germán Zoeger
+                    fullNameInput.value = 'Germán Zoeger';
+                    companyInput.value = 'Consultoría Comercial / Uso Interno';
+                    emailInput.value = 'gzoegerl@gmail.com';
+                    if (!messageInput.value.trim()) {
+                        messageInput.value = `Auto-solicitud de servicio (${serviceSelect.value}) generada desde mi web personal para revisión, seguimiento comercial o prueba de recepción en bandeja.`;
+                    }
+
+                    // Limpiar posibles estados de error previos
+                    [fullNameInput, companyInput, emailInput, messageInput].forEach(inp => validateField(inp));
+                } else {
+                    // Restaurar modo consulta externa
+                    toggleSelfRequestBtn.classList.add('bg-editorial-secondary', 'text-editorial-text');
+                    toggleSelfRequestBtn.classList.remove('bg-editorial-black', 'text-editorial-bg');
+                    toggleSelfRequestLabel.textContent = 'Auto-envío / Prueba a mi correo (gzoegerl@gmail.com)';
+                    selfRequestStatusText.innerHTML = 'Consulta estándar de cliente hacia <strong>gzoegerl@gmail.com</strong>';
+                    submitBtnText.textContent = 'ENVIAR A GZOEGERL@GMAIL.COM';
+
+                    fullNameInput.value = '';
+                    companyInput.value = '';
+                    emailInput.value = '';
+                    messageInput.value = '';
+                }
+            }
+
+            if (toggleSelfRequestBtn) {
+                toggleSelfRequestBtn.addEventListener('click', () => {
+                    setSelfRequestMode(!isSelfRequestMode);
+                });
+            }
+
+            // Actualizar texto sugerido en auto-solicitud si cambia el servicio y no fue editado manualmente
+            serviceSelect.addEventListener('change', () => {
+                if (isSelfRequestMode && messageInput.value.startsWith('Auto-solicitud de servicio (')) {
+                    messageInput.value = `Auto-solicitud de servicio (${serviceSelect.value}) generada desde mi web personal para revisión, seguimiento comercial o prueba de recepción en bandeja.`;
+                }
+            });
+
+            function buildMailtoUrl() {
+                const nameVal = fullNameInput.value.trim() || 'Germán Zoeger';
+                const companyVal = companyInput.value.trim() || 'Consultoría Comercial / Uso Interno';
+                const emailVal = emailInput.value.trim() || 'gzoegerl@gmail.com';
+                const serviceVal = serviceSelect.value;
+                const isSelf = isSelfRequestMode || emailVal.toLowerCase() === 'gzoegerl@gmail.com';
+                const messageVal = messageInput.value.trim() || `Solicitud de servicio: ${serviceVal}`;
+
+                const prefix = isSelf ? '[Auto-solicitud / Prueba]' : '[Nueva Consulta Web]';
+                const subject = encodeURIComponent(`${prefix} ${serviceVal} - ${nameVal}`);
+                const body = encodeURIComponent(
+                    `Hola Germán,\n\n` +
+                    `Tipo de envío: ${isSelf ? 'Auto-solicitud / Prueba interna' : 'Consulta desde web personal'}\n` +
+                    `Nombre: ${nameVal}\n` +
+                    `Empresa: ${companyVal}\n` +
+                    `Correo remitente: ${emailVal}\n` +
+                    `Servicio de interés: ${serviceVal}\n\n` +
+                    `Detalle de la solicitud:\n${messageVal}`
+                );
+                return `mailto:gzoegerl@gmail.com?subject=${subject}&body=${body}`;
+            }
+
+            if (directMailClientBtn) {
+                directMailClientBtn.addEventListener('click', () => {
+                    window.location.href = buildMailtoUrl();
+                });
+            }
 
             function validateField(input) {
                 const errorEl = input.parentElement.querySelector('.error-msg');
@@ -1114,18 +1361,20 @@
 
                 if (!allValid) return;
 
-                const nameVal = document.getElementById('fullName').value.trim();
-                const companyVal = document.getElementById('company').value.trim();
-                const emailVal = document.getElementById('email').value.trim();
-                const serviceVal = document.getElementById('service').value;
-                const messageVal = document.getElementById('message').value.trim();
+                const nameVal = fullNameInput.value.trim();
+                const companyVal = companyInput.value.trim();
+                const emailVal = emailInput.value.trim();
+                const serviceVal = serviceSelect.value;
+                const messageVal = messageInput.value.trim();
+                const isSelf = isSelfRequestMode || emailVal.toLowerCase() === 'gzoegerl@gmail.com';
+                const subjectPrefix = isSelf ? '[Auto-solicitud / Prueba]' : '[Nueva Consulta Web]';
 
                 // Estado enviando
                 submitFormBtn.disabled = true;
-                submitBtnText.textContent = 'ENVIANDO CONSULTA...';
+                submitBtnText.textContent = isSelf ? 'ENVIANDO AUTO-SOLICITUD...' : 'ENVIANDO CONSULTA...';
 
                 try {
-                    // Envío directo sin backend vía FormSubmit AJAX hacia gzoegerl@gmail.com
+                    // Envío directo vía FormSubmit AJAX hacia gzoegerl@gmail.com
                     const response = await fetch('https://formsubmit.co/ajax/gzoegerl@gmail.com', {
                         method: 'POST',
                         headers: {
@@ -1133,46 +1382,52 @@
                             'Accept': 'application/json'
                         },
                         body: JSON.stringify({
-                            _subject: `Nueva Consulta Web (${serviceVal}) - ${nameVal}`,
+                            _subject: `${subjectPrefix} (${serviceVal}) - ${nameVal}`,
+                            Tipo_Solicitud: isSelf ? 'Auto-solicitud / Prueba interna' : 'Consulta Web Externa',
                             Nombre: nameVal,
                             Empresa: companyVal,
-                            Correo: emailVal,
+                            Correo_Remitente: emailVal,
                             Servicio: serviceVal,
                             Mensaje: messageVal
                         })
                     });
 
-                    if (response.ok) {
+                    const result = await response.json().catch(() => ({}));
+
+                    if (response.ok && result.success !== 'false') {
+                        const mailtoHref = buildMailtoUrl();
                         formFeedback.className = 'rounded-xl p-4 border border-emerald-800/30 bg-emerald-900/10 text-editorial-text text-sm block';
                         formFeedback.innerHTML = `
-                            <p class="font-display uppercase tracking-wider font-bold text-emerald-900">¡Mensaje enviado con éxito a Germán Zoeger!</p>
-                            <p class="mt-1 text-xs text-editorial-muted">Tu consulta sobre <strong>${serviceVal}</strong> ha sido enviada a <strong>gzoegerl@gmail.com</strong>. Me pondré en contacto contigo a la brevedad.</p>
+                            <p class="font-display uppercase tracking-wider font-bold text-emerald-900">
+                                ${isSelf ? '¡Auto-solicitud enviada a tu bandeja (gzoegerl@gmail.com)!' : '¡Mensaje enviado con éxito a Germán Zoeger!'}
+                            </p>
+                            <p class="mt-1 text-xs text-editorial-muted">
+                                Tu solicitud sobre <strong>${serviceVal}</strong> fue despachada hacia <strong>gzoegerl@gmail.com</strong>. 
+                                <a href="${mailtoHref}" class="underline font-medium text-editorial-text ml-1">También puedes abrirla en tu cliente de correo →</a>
+                            </p>
                         `;
-                        contactForm.reset();
+                        if (!isSelf) {
+                            contactForm.reset();
+                        }
                     } else {
                         throw new Error('Fallback mailto');
                     }
                 } catch (err) {
-                    // Fallback automático garantizado a cliente de correo (mailto) + confirmación visual
-                    const subject = encodeURIComponent(`Consulta Web: ${serviceVal} - ${companyVal}`);
-                    const body = encodeURIComponent(
-                        `Hola Germán,\n\n` +
-                        `Nombre: ${nameVal}\n` +
-                        `Empresa: ${companyVal}\n` +
-                        `Correo: ${emailVal}\n` +
-                        `Servicio de interés: ${serviceVal}\n\n` +
-                        `Mensaje:\n${messageVal}`
-                    );
-                    window.location.href = `mailto:gzoegerl@gmail.com?subject=${subject}&body=${body}`;
+                    // Respaldo automático garantizado a cliente de correo (mailto) + confirmación visual
+                    window.location.href = buildMailtoUrl();
 
                     formFeedback.className = 'rounded-xl p-4 border border-editorial-black/30 bg-editorial-secondary text-editorial-text text-sm block';
                     formFeedback.innerHTML = `
-                        <p class="font-display uppercase tracking-wider font-bold">Abriendo tu gestor de correo hacia gzoegerl@gmail.com</p>
-                        <p class="mt-1 text-xs text-editorial-muted">Si prefieres una respuesta inmediata, también puedes escribirme directo al WhatsApp <strong>+51 951 465 079</strong>.</p>
+                        <p class="font-display uppercase tracking-wider font-bold">
+                            ${isSelf ? 'Abriendo auto-solicitud en tu correo hacia gzoegerl@gmail.com' : 'Abriendo tu gestor de correo hacia gzoegerl@gmail.com'}
+                        </p>
+                        <p class="mt-1 text-xs text-editorial-muted">
+                            Se ha preparado el asunto <strong>${subjectPrefix}</strong> con todos los datos listos para enviar a tu bandeja.
+                        </p>
                     `;
                 } finally {
                     submitFormBtn.disabled = false;
-                    submitBtnText.textContent = 'ENVIAR A GZOEGERL@GMAIL.COM';
+                    submitBtnText.textContent = isSelfRequestMode ? 'AUTO-ENVIAR SOLICITUD A MI BANDEJA' : 'ENVIAR A GZOEGERL@GMAIL.COM';
                 }
             });
         });
