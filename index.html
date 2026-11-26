@@ -675,7 +675,7 @@
                         <p class="text-xs sm:text-sm text-editorial-muted mb-5">
                             Completa este formulario para escribirme a mi correo electrónico o contáctame por WhatsApp para cualquier información o servicio requerido.
                         </p>
-                        <form id="contactForm" action="https://formsubmit.co/8354c16ddbb7eef85b48b861d36cd591" method="POST" novalidate class="space-y-5">
+                        <form id="contactForm" action="https://formsubmit.co/8354c16ddbb7eef85b48b861d36cd591" method="POST" class="space-y-5">
                             <!-- Configuración estándar del backend de FormSubmit -->
                             <input type="hidden" name="_subject" value="Nueva Consulta Web — Germán Zoeger">
                             <input type="hidden" name="_captcha" value="false">
@@ -1199,16 +1199,11 @@
             // -----------------------------------------------------------------
             // 8. VALIDACIÓN EN TIEMPO REAL Y ENVÍO DEL FORMULARIO
             // -----------------------------------------------------------------
+            // 8. VALIDACIÓN EN TIEMPO REAL Y ENVÍO DIRECTO DEL FORMULARIO
+            // -----------------------------------------------------------------
             const contactForm = document.getElementById('contactForm');
-            const formFeedback = document.getElementById('formFeedback');
             const submitBtnText = document.getElementById('submitBtnText');
             const submitFormBtn = document.getElementById('submitFormBtn');
-
-            const fullNameInput = document.getElementById('fullName');
-            const companyInput = document.getElementById('company');
-            const emailInput = document.getElementById('email');
-            const serviceSelect = document.getElementById('service');
-            const messageInput = document.getElementById('message');
 
             function validateField(input) {
                 const errorEl = input.parentElement.querySelector('.error-msg');
@@ -1233,83 +1228,33 @@
                 return isValid;
             }
 
-            const requiredInputs = contactForm.querySelectorAll('input[required], textarea[required]');
-            requiredInputs.forEach(input => {
-                input.addEventListener('blur', () => validateField(input));
-                input.addEventListener('input', () => {
-                    if (!input.parentElement.querySelector('.error-msg')?.classList.contains('hidden')) {
-                        validateField(input);
-                    }
-                });
-            });
-
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                let allValid = true;
+            if (contactForm) {
+                const requiredInputs = contactForm.querySelectorAll('input[required], textarea[required]');
                 requiredInputs.forEach(input => {
-                    if (!validateField(input)) allValid = false;
+                    input.addEventListener('blur', () => validateField(input));
+                    input.addEventListener('input', () => {
+                        if (!input.parentElement.querySelector('.error-msg')?.classList.contains('hidden')) {
+                            validateField(input);
+                        }
+                    });
                 });
 
-                if (!allValid) return;
-
-                const nameVal = fullNameInput.value.trim();
-                const companyVal = companyInput.value.trim();
-                const emailVal = emailInput.value.trim();
-                const serviceVal = serviceSelect.value;
-                const messageVal = messageInput.value.trim();
-
-                submitFormBtn.disabled = true;
-                submitBtnText.textContent = 'ENVIANDO CONSULTA...';
-
-                try {
-                    const response = await fetch('https://formsubmit.co/ajax/8354c16ddbb7eef85b48b861d36cd591', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            _subject: `[Nueva Consulta Web] (${serviceVal}) - ${nameVal}`,
-                            Nombre: nameVal,
-                            Empresa: companyVal,
-                            Correo_Remitente: emailVal,
-                            Servicio: serviceVal,
-                            Mensaje: messageVal
-                        })
+                contactForm.addEventListener('submit', (e) => {
+                    let allValid = true;
+                    requiredInputs.forEach(input => {
+                        if (!validateField(input)) allValid = false;
                     });
 
-                    const result = await response.json().catch(() => ({}));
-
-                    if (response.ok && result.success !== 'false') {
-                        formFeedback.className = 'rounded-xl p-4 border border-emerald-800/30 bg-emerald-900/10 text-editorial-text text-sm block';
-                        formFeedback.innerHTML = `
-                            <p class="font-display uppercase tracking-wider font-bold text-emerald-900">
-                                ¡Mensaje enviado con éxito a Germán Zoeger!
-                            </p>
-                            <p class="mt-1 text-xs text-editorial-muted">
-                                Tu consulta sobre <strong>${serviceVal}</strong> fue recibida correctamente. También puedes escribirme al WhatsApp <strong>+51 951 465 079</strong>.
-                            </p>
-                        `;
-                        contactForm.reset();
-                    } else {
-                        throw new Error('Submit fallback');
+                    if (!allValid) {
+                        e.preventDefault();
+                        return;
                     }
-                } catch (err) {
-                    formFeedback.className = 'rounded-xl p-4 border border-editorial-black/30 bg-editorial-secondary text-editorial-text text-sm block';
-                    formFeedback.innerHTML = `
-                        <p class="font-display uppercase tracking-wider font-bold">
-                            Consulta registrada
-                        </p>
-                        <p class="mt-1 text-xs text-editorial-muted">
-                            Si necesitas atención inmediata, escríbeme directamente por WhatsApp al <strong>+51 951 465 079</strong>.
-                        </p>
-                    `;
-                } finally {
-                    submitFormBtn.disabled = false;
-                    submitBtnText.textContent = 'ENVIAR CONSULTA';
-                }
-            });
+
+                    if (submitFormBtn && submitBtnText) {
+                        submitBtnText.textContent = 'ENVIANDO CONSULTA...';
+                    }
+                });
+            }
         });
     </script>
 </body>
